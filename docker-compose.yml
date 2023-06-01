@@ -1,0 +1,20 @@
+services:
+  hubgrabber:
+    hostname: hubgrabber
+    container_name: hubgrabber
+    restart: always
+    volumes:
+      - ./data/wordlists:/data/wordlists:ro
+      - ./data/logs:/data/logs:rw
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.25
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # pick a few from https://github.com/danielmiessler/SecLists/tree/master
+        - WORDLIST="wordlists/Miscellaneous/Moby-Project/Moby-Words-II/NAMES.TXT"
+    # not even sure if thats working
+    command: git clone --depth 1 https://github.com/danielmiessler/SecLists.git /data/wordlists
