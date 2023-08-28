@@ -9,6 +9,10 @@ permissions:
   contents: read
   packages: write
 
+env:
+  BUILDX_GIT_LABELS: full
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+
 jobs:
   build:
     runs-on: ubuntu-latest
