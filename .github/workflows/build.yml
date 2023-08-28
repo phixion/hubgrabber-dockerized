@@ -52,6 +52,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push to GitHub Packages
+        id: build-and-push
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -59,6 +60,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Sign the published Docker image
         if: ${{ github.event_name != 'pull_request' }}
