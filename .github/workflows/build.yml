@@ -68,9 +68,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-        env:
-          BUILDX_GIT_LABELS: full
-          BUILDX_NO_DEFAULT_ATTESTATIONS: true
+          provenance: false
 
 
       - name: Sign the published Docker image
